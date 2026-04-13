@@ -2,6 +2,7 @@ package printer
 
 import (
 	"fmt"
+	"log/slog"
 	"net"
 	"time"
 )
@@ -23,7 +24,8 @@ func NewSocketPrinter(ip, port string, timeoutSec int) *socketPrinter {
 func (p *socketPrinter) SendZPL(zpl string) error {
 	address := net.JoinHostPort(p.ip, p.port)
 	timeout := time.Duration(p.timeoutSec) * time.Second
-	fmt.Println("DEBUG: request to :", address)
+	// fmt.Println("DEBUG: request to :", address)
+	slog.Info("Sending ZPL request", slog.String("address", address))
 
 	conn, err := net.DialTimeout("tcp", address, timeout)
 	if err != nil {
