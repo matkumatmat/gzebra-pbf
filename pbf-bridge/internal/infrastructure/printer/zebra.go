@@ -13,7 +13,6 @@ type bidirectionalPrinter struct {
 	timeoutSec int
 }
 
-// Constructor baru
 func NewBidirectionalPrinter(ip, port string, timeoutSec int) *bidirectionalPrinter {
 	return &bidirectionalPrinter{
 		ip:         ip,
@@ -26,28 +25,28 @@ func (p *bidirectionalPrinter) SendZPL(zpl string) error {
 	address := net.JoinHostPort(p.ip, p.port)
 	timeout := time.Duration(p.timeoutSec) * time.Second
 
-	// 1. Buka Koneksi TCP
+	// 1. SYNC
 	conn, err := net.DialTimeout("tcp", address, timeout)
 	if err != nil {
 		return fmt.Errorf("koneksi ke printer mati/putus: %w", err)
 	}
 	defer conn.Close()
 
-	// 2. TANYA KABAR (Kirim command Zebra Host Status)
+	// 2. ACK
 	_, err = conn.Write([]byte("~HS"))
 	if err != nil {
 		return fmt.Errorf("gagal kirim request status ke printer: %w", err)
 	}
 
-	// 3. DENGERIN JAWABAN (Max tunggu 2 detik biar ga ngehang)
+	// 3. LISTEN PRINTER RESPONSES (Status Hardware)
 	conn.SetReadDeadline(time.Now().Add(2 * time.Second))
 	buffer := make([]byte, 1024)
 	n, err := conn.Read(buffer)
 	if err != nil {
-		return fmt.Errorf("printer konek tapi ga respon status (mungkin lg sibuk/bukan Zebra): %w", err)
+		return fmt.Errorf("printer connected but got fail to read response: %w", err)
 	}
 
-	// 4. PARSING JAWABAN (Handler Hardware)
+	// 4. PARSING RESPONSE PRINTER
 	rawResponse := string(buffer[:n])
 	if err := p.checkHardwareStatus(rawResponse); err != nil {
 		return fmt.Errorf("HARDWARE ERROR: %w", err)
@@ -62,9 +61,7 @@ func (p *bidirectionalPrinter) SendZPL(zpl string) error {
 	return nil
 }
 
-// ==========================================
 // HANDLER PARSING PRINTER ZEBRA ORDER STATUS HARDWARE
-// ==========================================
 func (p *bidirectionalPrinter) checkHardwareStatus(rawResponse string) error {
 	cleanResp := strings.ReplaceAll(rawResponse, "\x02", "")
 	blocks := strings.Split(cleanResp, "\x03")

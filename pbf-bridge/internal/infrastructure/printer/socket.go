@@ -21,20 +21,19 @@ func NewSocketPrinter(ip, port string, timeoutSec int) *socketPrinter {
 }
 
 func (p *socketPrinter) SendZPL(zpl string) error {
-	// Menggunakan net.JoinHostPort menggantikan fmt.Sprintf
 	address := net.JoinHostPort(p.ip, p.port)
 	timeout := time.Duration(p.timeoutSec) * time.Second
-	fmt.Println("🕵️ DEBUG: Go lagi nyoba nembak ke IP ->", address)
+	fmt.Println("DEBUG: request to :", address)
 
 	conn, err := net.DialTimeout("tcp", address, timeout)
 	if err != nil {
-		return fmt.Errorf("koneksi printer gagal di %s: %w", address, err)
+		return fmt.Errorf("printer connection failed on: %s: %w", address, err)
 	}
 	defer conn.Close()
 
 	_, err = conn.Write([]byte(zpl))
 	if err != nil {
-		return fmt.Errorf("gagal mengirim ZPL byte: %w", err)
+		return fmt.Errorf("failed to send ZPL bytes on: %s: %w", address, err)
 	}
 
 	return nil

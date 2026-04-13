@@ -21,7 +21,7 @@ type Config struct {
 func LoadConfig() *Config {
 	err := godotenv.Load()
 	if err != nil {
-		slog.Warn("File .env tidak ditemukan, menggunakan environment variable bawaan sistem")
+		slog.Warn("Can't load .env file, relying on environment variables", "error", err.Error())
 	}
 
 	timeout, _ := strconv.Atoi(os.Getenv("PRINTER_TIMEOUT_SEC"))

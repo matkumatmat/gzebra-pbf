@@ -22,14 +22,12 @@ type ShippingRecipient struct {
 	Contact      string `json:"contact"`
 }
 
-// PrintShippingPayload payload utama untuk pengiriman (WMS)
 type PrintShippingPayload struct {
 	Recipient ShippingRecipient `json:"recipient"`
 	TotalBox  int               `json:"total_box"`
 	Boxes     []ShippingBox     `json:"boxes"`
 }
 
-// ShippingUseCase kontrak untuk business logic label pengiriman
 type ShippingUseCase interface {
 	ProcessShippingLabels(payload PrintShippingPayload, isRetry bool) error
 }

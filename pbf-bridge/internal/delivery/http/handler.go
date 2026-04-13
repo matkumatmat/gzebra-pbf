@@ -13,7 +13,6 @@ type PrintHandler struct {
 	identityUseCase domain.IdentityUseCase
 }
 
-// Constructor nerima dua usecase sekaligus
 func NewPrintHandler(suc domain.ShippingUseCase, iuc domain.IdentityUseCase) *PrintHandler {
 	return &PrintHandler{
 		shippingUseCase: suc,
@@ -21,16 +20,13 @@ func NewPrintHandler(suc domain.ShippingUseCase, iuc domain.IdentityUseCase) *Pr
 	}
 }
 
-// Helper function buat CORS biar gak ngetik ulang terus
 func setupCORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }
 
-// ==========================================
-// 1. HANDLER UNTUK SHIPPING LABEL
-// ==========================================
+// 1. HANDLER FOR SHIPPING LABEL
 func (h *PrintHandler) PrintShipping(w http.ResponseWriter, r *http.Request) {
 	setupCORS(w)
 	if r.Method == http.MethodOptions {
@@ -50,7 +46,7 @@ func (h *PrintHandler) PrintShipping(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	slog.Info("Menerima request cetak Shipping", "customer", payload.Recipient.Customer, "total_box", payload.TotalBox)
+	slog.Info("Received Shipping Request", "customer", payload.Recipient.Customer, "total_box", payload.TotalBox)
 
 	if err := h.shippingUseCase.ProcessShippingLabels(payload, false); err != nil {
 		slog.Error("Failed to process shipping label", "error", err.Error())
@@ -63,9 +59,7 @@ func (h *PrintHandler) PrintShipping(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"status": "success", "message": "Shipping labels printed"}`))
 }
 
-// ==========================================
-// 2. HANDLER UNTUK IDENTITY LABEL (PRODUK)
-// ==========================================
+// 2. HANDLER FOR IDENTITY LABEL (PRODUCT LABEL)
 func (h *PrintHandler) PrintIdentity(w http.ResponseWriter, r *http.Request) {
 	setupCORS(w)
 	if r.Method == http.MethodOptions {

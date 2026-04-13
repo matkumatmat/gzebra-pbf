@@ -17,40 +17,36 @@ import (
 )
 
 func main() {
-	// 1. Init Logger
 	logger.Init()
-
-	// 2. Load Config
 	cfg := config.LoadConfig()
 
-	// 3. Setup Context for Graceful Shutdown of background workers
+	// Setup Context for Graceful Shutdown of background workers
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// 4. Init Repositories (Infrastructure Layer)
+	// Init Repositories (Infrastructure Layer)
 	printerRepo := printer.NewBidirectionalPrinter(cfg.PrinterIP, cfg.PrinterPort, cfg.PrinterTimeoutSec)
 	templateRepo := filesystem.NewFileTemplateRepository()
 	pendingRepo := filesystem.NewPendingJobRepository(cfg.PendingJobPath)
 
-	// 5. Init Pending Usecase (Without main usecases to prevent circular dependency)
+	// Init Pending Usecase (Without main usecases to prevent circular dependency)
 	pendingUC := usecase.NewPendingUseCase(pendingRepo)
 
-	// 6. Init Main Usecases (Injecting pendingUC)
+	// Init Main Usecases (Injecting pendingUC)
 	shippingUC := usecase.NewShippingUseCase(printerRepo, templateRepo, pendingUC, cfg.ShippingTemplatePath)
 	identityUC := usecase.NewIdentityUseCase(printerRepo, templateRepo, pendingUC, cfg.IdentityTemplatePath)
 
-	// 7. Resolve Circular Dependency
+	// Resolve Circular Dependency
 	pendingUC.SetUsecases(shippingUC, identityUC)
 
-	// 8. Init and Start Internal Cron Worker
-	// Setting interval to 30 minutes. You can extract this to .env/config later if needed.
-	retryWorker := cron.NewWorker(pendingUC, 30)
+	// Init and Start Internal Cron Worker
+	retryWorker := cron.NewWorker(pendingUC, 1)
 	go retryWorker.Start(ctx)
 
-	// 9. Init Handler (Delivery Layer)
+	// Init Handler (Delivery Layer)
 	printHandler := delivery.NewPrintHandler(shippingUC, identityUC)
 
-	// 10. Setup HTTP Router
+	// Setup HTTP Router
 	mux := http.NewServeMux()
 	mux.HandleFunc("/print/shipping", printHandler.PrintShipping)
 	mux.HandleFunc("/print/identity", printHandler.PrintIdentity)
