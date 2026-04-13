@@ -1,0 +1,28 @@
+{
+  "recipient": {
+    "customer": "Klinik Sehat Selalu",
+    "branch": "Cabang Pasteur",
+    "address_line_1": "Jl. Dr. Djunjunan No. 123",
+    "address_line_2": "Kota Bandung, 40162",
+    "contact": "Bpk. Budi - 08123456789"
+  },
+  "total_box": 2,
+  "boxes": [
+    {
+      "current_box": 1,
+      "petugas": "Kaye",
+      "temperature": "2-8 °C",
+      "products": [
+        { "name": "Vaksin A", "qty": "10" }
+      ]
+    },
+    {
+      "current_box": 2,
+      "petugas": "Kaye",
+      "temperature": "2-8 °C",
+      "products": [
+        { "name": "Vaksin B", "qty": "5" }
+      ]
+    }
+  ]
+}

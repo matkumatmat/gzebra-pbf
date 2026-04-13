@@ -1,0 +1,26 @@
+{
+  "identities": [
+    {
+      "product_code": "VAK-001",
+      "product_name_1": "VAKSIN INFLUENZA",
+      "product_name_2": "STRAIN SELATAN 2026",
+      "batch_number": "BCH-998877",
+      "allocation": "KOTA BANDUNG",
+      "mfg_date": "10/03/2026",
+      "exp_date": "10/03/2028",
+      "receive_date": "12/03/2026",
+      "qr_code": "VAK-001|BCH-998877|10/03/2028"
+    },
+    {
+      "product_code": "VAK-002",
+      "product_name_1": "SERUM ANTI BISA",
+      "product_name_2": "ULAR POLYVALENT",
+      "batch_number": "BCH-554433",
+      "allocation": "KOTA CIMAHI",
+      "mfg_date": "01/02/2026",
+      "exp_date": "01/02/2029",
+      "receive_date": "12/03/2026",
+      "qr_code": "VAK-002|BCH-554433|01/02/2029"
+    }
+  ]
+}
