@@ -25,7 +25,9 @@ func main() {
 	defer cancel()
 
 	// Init Repositories (Infrastructure Layer)
-	printerRepo := printer.NewBidirectionalPrinter(cfg.PrinterIP, cfg.PrinterPort, cfg.PrinterTimeoutSec)
+	// printerRepo := printer.NewBidirectionalPrinter(cfg.PrinterIP, cfg.PrinterPort, cfg.PrinterTimeoutSec)
+	// printerRepo := printer.NewBidirectionalPrinter(...)
+	printerRepo := printer.NewSocketPrinter(cfg.PrinterIP, cfg.PrinterPort, cfg.PrinterTimeoutSec)
 	templateRepo := filesystem.NewFileTemplateRepository()
 	pendingRepo := filesystem.NewPendingJobRepository(cfg.PendingJobPath)
 

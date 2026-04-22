@@ -1,0 +1,307 @@
+<script>
+  let masterCustomers = [];
+  let selectedCustomerPayload = null; // State untuk menyimpan data customer yang dipilih
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderBoxComponents();
+    loadPrintQueue(); 
+    loadMasterCustomers();
+  });
+
+  // COMPONENT: Merender form input untuk masing-masing Box
+  function renderBoxComponents() {
+    const totalBox = parseInt(document.getElementById('totalBox').value) || 1;
+    const container = document.getElementById('boxes-container');
+    container.innerHTML = ''; 
+
+    for (let i = 1; i <= totalBox; i++) {
+      const boxDiv = document.createElement('div');
+      boxDiv.className = 'box-component';
+      
+      boxDiv.innerHTML = `
+        <h4 style="margin-bottom: 10px; color: var(--primary);">Box ${i}</h4>
+        <div class="form-group">
+          <label>Petugas</label>
+          <input type="text" class="box-petugas" value="Kaye" data-box="${i}">
+        </div>
+        <div class="form-group">
+          <label>Suhu (Temperature)</label>
+          <input type="text" class="box-temp" value="2-8 °C" data-box="${i}">
+        </div>
+        <div class="form-group">
+          <label>Produk & Qty (Format: Nama,Qty)</label>
+          <input type="text" class="box-products" value="Vaksin A,10" data-box="${i}">
+        </div>
+      `;
+      container.appendChild(boxDiv);
+    }
+  }
+
+  /**
+   * FUNGSI LOAD DATA (Sudah pakai UI.renderTableLoading)
+   */
+  async function loadPrintQueue() {
+    // Pakai komponen loading dari UIComponents! Colspan 5 karena kolom tabel ada 5
+    UI.renderTableLoading('print-queue-body', 5, 'Menarik data antrian cetak...');
+
+    try {
+      const data = await GasApi.get('getShippingLabels', 1, 20);
+      const tableBody = document.getElementById('print-queue-body');
+      tableBody.innerHTML = ''; 
+
+      if (data && data.length > 0) {
+        data.forEach(label => addToQueueTable(label));
+      } else {
+        UI.renderTableEmpty('print-queue-body', 5, 'Belum ada dokumen label tercetak.');
+      }
+    } catch (error) {
+      document.getElementById('print-queue-body').innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--secondary);">Error: ${error.message}</td></tr>`;
+    }
+  }
+
+  /**
+   * MISI A: Fetch data Customer dari GAS dan masukin ke Datalist
+   */
+/**
+   * MISI A: Fetch data Customer & masukin ke Datalist
+   */
+// --- LOGIC: FUNGSI MEMOTONG ALAMAT (Max 15 Karakter) ---
+  function splitAddress15(fullAddress) {
+    if (!fullAddress) return { line1: '', line2: '' };
+    let text = fullAddress.trim();
+    
+    // Kalau pendek, masukin line 1 semua
+    if (text.length <= 15) return { line1: text, line2: '' };
+    
+    // Potong max 15 char untuk line 1 (Cari spasi terdekat biar kata ga kepotong jelek)
+    let splitIndex = text.lastIndexOf(' ', 15);
+    if (splitIndex === -1 || splitIndex === 0) splitIndex = 15; // Kalau ga ada spasi, potong paksa
+    
+    let l1 = text.substring(0, splitIndex).trim();
+    // Line 2 ambil sisanya, dan potong lagi max 15 char
+    let l2 = text.substring(splitIndex).trim().substring(0, 15).trim();
+    
+    return { line1: l1, line2: l2 };
+  }
+
+  // --- MISI A: Fetch data Customer (Sama kaya kemaren) ---
+  async function loadMasterCustomers() {
+    try {
+      masterCustomers = await GasApi.get('getCustomers', 1, 100); 
+    } catch (error) {
+      console.error("Gagal narik data customer:", error);
+    }
+  }
+
+  // --- UI LOGIC: CUSTOM DROPDOWN & SEARCH ---
+  const searchInput = document.getElementById('custSearch');
+  const dropdown = document.getElementById('customDropdown');
+  const cardInfo = document.getElementById('customerCard');
+
+  // Pas ngetik di input
+  searchInput.addEventListener('input', function(e) {
+    const keyword = e.target.value.toLowerCase();
+    dropdown.innerHTML = ''; // Bersihin dropdown
+
+    if (keyword.length < 2) {
+      dropdown.classList.remove('show');
+      return;
+    }
+
+    // Filter berdasarkan Nama KONSUMEN atau KOTA CABANG
+    const filtered = masterCustomers.filter(c => 
+      (c.namaKonsumen && c.namaKonsumen.toLowerCase().includes(keyword)) ||
+      (c.kotaCabang && c.kotaCabang.toLowerCase().includes(keyword))
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(cust => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        // Tampilan di dropdown
+        item.innerHTML = `
+          <div class="di-title">${cust.namaKonsumen}</div>
+          <div class="di-sub">Cabang: ${cust.kotaCabang || '-'}</div>
+        `;
+        
+        // Pas opsi diklik
+        item.addEventListener('click', () => {
+          // 1. Simpan ke Global Payload & isi Search Input
+          selectedCustomerPayload = cust;
+          searchInput.value = cust.namaKonsumen;
+          dropdown.classList.remove('show');
+          
+          // 2. Jalankan algoritma potong alamat 15 char lu!
+          const alamatLengkap = `${cust.alamat || ''}, ${cust.kota || ''}`;
+          const splitAlamat = splitAddress15(alamatLengkap);
+          
+          // 3. Update Text di Card Info
+          document.getElementById('ccNameBranch').innerText = `${cust.namaKonsumen} - ${cust.kotaCabang || '-'}`;
+          document.getElementById('ccAddress1').innerText = `L1: ${splitAlamat.line1}`;
+          document.getElementById('ccAddress2').innerText = `L2: ${splitAlamat.line2}`;
+          document.getElementById('ccContact').innerText = cust.kontak || '-';
+          document.getElementById('ccPic').innerText = `PIC: ${cust.pic || '-'}`;
+          
+          // 4. Munculin Card & render lucide icons (karena card sempet hidden)
+          cardInfo.classList.add('show');
+          lucide.createIcons();
+        });
+        dropdown.appendChild(item);
+      });
+      dropdown.classList.add('show');
+    } else {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Tutup dropdown kalau klik di luar
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
+  // EVENT LISTENER: Submit Form (Sudah pakai UI.setBtnLoading & UI.toast)
+  document.getElementById('shippingForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); 
+    
+    // Ganti state button pakai komponen UI
+    UI.setBtnLoading('btnSubmit', true);
+
+// Cek apakah user udah milih customer
+    if (!selectedCustomerPayload) {
+      UI.toast("Pilih Customer dari dropdown terlebih dahulu!", "warning");
+      UI.setBtnLoading('btnSubmit', false, "Generate Payload & Simpan");
+      return;
+    }
+
+    // Eksekusi ulang logic potong 15 karakter buat dikirim ke backend
+    const alamatLengkap = `${selectedCustomerPayload.alamat || ''}, ${selectedCustomerPayload.kota || ''}`;
+    const finalAlamat = splitAddress15(alamatLengkap);
+
+    // Rakit Recipient Payload buat GO-LANG Server
+    const recipient = {
+      customer: selectedCustomerPayload.namaKonsumen,
+      branch: selectedCustomerPayload.kotaCabang || '',
+      address_line_1: finalAlamat.line1,
+      address_line_2: finalAlamat.line2,
+      contact: `${selectedCustomerPayload.pic || ''} - ${selectedCustomerPayload.kontak || ''}`
+    };
+
+    const totalBox = parseInt(document.getElementById('totalBox').value);
+    const boxes = [];
+    
+    for (let i = 1; i <= totalBox; i++) {
+      const petugas = document.querySelector(`.box-petugas[data-box="${i}"]`).value;
+      const temp = document.querySelector(`.box-temp[data-box="${i}"]`).value;
+      const rawProducts = document.querySelector(`.box-products[data-box="${i}"]`).value;
+      
+      const productsArr = rawProducts.split(';').map(p => {
+        const [name, qty] = p.split(',');
+        return { name: name.trim(), qty: qty ? qty.trim() : "1" };
+      });
+
+      boxes.push({ current_box: i, petugas: petugas, temperature: temp, products: productsArr });
+    }
+
+    const finalPayload = {
+      customerId: "CUST-DUMMY", 
+      noDokumen: "DOC-" + Date.now(),
+      payloadRecipient: recipient,
+      payloadTotalBox: totalBox,
+      payloadBoxes: boxes,
+      payloadQr: {}
+    };
+
+    try {
+      const responseData = await GasApi.post("createShippingLabel", finalPayload);
+      
+      // Pakai komponen Toast!
+      UI.toast("Mantap! Data sukses masuk ke Spreadsheet!", "success");
+      addToQueueTable(responseData); 
+      
+    } catch (error) {
+      UI.toast("Waduh Gagal: " + error.message, "error");
+    } finally {
+      // Kembalikan state button
+      UI.setBtnLoading('btnSubmit', false, "Generate Payload & Simpan");
+    }
+  });
+
+  /**
+   * FUNGSI PRINT: Nembak Go-lang Server di Localhost (Pakai Toast)
+   */
+/**
+   * MISI B: Nembak Go-lang Server + Update Status di Spreadsheet
+   */
+  async function sendToPrinter(labelData) {
+    const LOCAL_PRINTER_URL = 'http://localhost:8080/print/shipping'; 
+    const payloadGo = {
+      recipient: labelData.payloadRecipient,
+      total_box: labelData.payloadTotalBox,
+      boxes: labelData.payloadBoxes
+    };
+
+    try {
+      // 1. Nembak Go-lang Lokal
+      const response = await fetch(LOCAL_PRINTER_URL, {
+        method: 'POST',
+        mode: 'cors', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payloadGo)
+      });
+
+      if (response.ok) {
+        UI.toast("Printer Zebra sedang memproses label!", "success");
+        
+        // 2. JIKA SUKSE PRINT LOKAL -> UPDATE STATUS KE SPREADSHEET VIA GAS
+        try {
+          UI.toast("Mengupdate status ke Spreadsheet...", "warning");
+          // Asumsi lo punya endpoint updatePrintStatus di backend
+          await GasApi.post('updatePrintStatus', {
+            noDokumen: labelData.noDokumen,
+            status: 'SUDAH_CETAK'
+          });
+          
+          UI.toast("Status berhasil diupdate!", "success");
+          loadPrintQueue(); // Refresh tabel biar badgenya berubah jadi ijo!
+          
+        } catch (gasError) {
+          UI.toast("Label tercetak, tapi gagal update status ke Sheet: " + gasError.message, "error");
+        }
+
+      } else {
+        UI.toast("Server Go-lang merespon dengan error.", "warning");
+      }
+    } catch (error) {
+      console.error("Koneksi gagal:", error);
+      UI.toast("Gagal konek ke Go-lang Server Lokal (Port 8080)!", "error");
+    }
+  }
+  /**
+   * COMPONENT: Render baris tabel buat data yang baru di-save
+   */
+function addToQueueTable(data) {
+    const tableBody = document.getElementById('print-queue-body');
+    const row = document.createElement('tr');
+    const custName = (data.payloadRecipient && data.payloadRecipient.customer) ? data.payloadRecipient.customer : 'Unknown';
+
+    row.innerHTML = `
+      <td>
+        <strong style="color: var(--primary);">${data.noDokumen}</strong><br>
+        <small style="color:#64748b">${Formatter.date(data.tanggal)}</small>
+      </td>
+      <td>${custName}</td>
+      <td>${data.payloadTotalBox} Box</td>
+      <td>${Formatter.statusBadge(data.printStatus || 'BELUM_CETAK')}</td>
+      <td>
+        <button class="btn btn-secondary" onclick='sendToPrinter(${JSON.stringify(data)})'>
+          <i data-lucide="${ClientConfig.ICONS.PRINT}" style="width:16px; height:16px;"></i> Cetak
+        </button>
+      </td>
+    `;
+    tableBody.prepend(row); 
+    
+    lucide.createIcons(); 
+  }
+
+</script>

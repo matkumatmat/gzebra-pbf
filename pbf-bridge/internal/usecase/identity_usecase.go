@@ -41,12 +41,12 @@ func (uc *identityUseCase) ProcessIdentityLabels(payload domain.PrintIdentityPay
 	// 3. Looping maju 2 langkah (chunking berpasangan)
 	for i := 0; i < len(payload.Identities); i += 2 {
 		label1 := payload.Identities[i]
-		label1.QRCode = fmt.Sprintf("%s", label1.BatchNumber)
+		label1.QRCode = fmt.Sprintf("%s", label1.QRCode)
 
 		label2 := domain.ProductIdentity{}
 		if i+1 < len(payload.Identities) {
 			label2 = payload.Identities[i+1]
-			label2.QRCode = fmt.Sprintf("%s", label2.BatchNumber)
+			label2.QRCode = fmt.Sprintf("%s", label2.QRCode)
 		}
 		data := struct {
 			Label1 domain.ProductIdentity
