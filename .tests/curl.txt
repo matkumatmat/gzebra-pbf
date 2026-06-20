@@ -1,0 +1,14 @@
+curl "http://localhost:8080/print/identity" ^
+  -H "Accept: */*" ^
+  -H "Accept-Language: en-US,en;q=0.9" ^
+  -H "Connection: keep-alive" ^
+  -H "Content-Type: application/json" ^
+  -H "Origin: https://n-7fzpzcbbrmmn2v7a3s7x2ilrl2bbkvythlryrpa-0lu-script.googleusercontent.com" ^
+  -H "Sec-Fetch-Dest: empty" ^
+  -H "Sec-Fetch-Mode: cors" ^
+  -H "Sec-Fetch-Site: cross-site" ^
+  -H "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1" ^
+  -H "sec-ch-ua: \"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"" ^
+  -H "sec-ch-ua-mobile: ?1" ^
+  -H "sec-ch-ua-platform: \"iOS\"" ^
+  --data-raw "{\"identities\":[{\"product_code\":\"P11COV0101I001\",\"product_name_1\":\"IndoVac SARS Cov-2\",\"product_name_2\":\"RBD Recombinant Protein 25 ug\",\"batch_number\":\"24902222\",\"allocation\":\"REGULAR SWT/PBF\",\"mfg_date\":\"-\",\"exp_date\":\"25/10/2025\",\"receive_date\":\"16/04/2026\",\"qr_code\":\"20ab15f9-4879-49d5-b37c-f5afccd4f91a\",\"qr_code_ext\":\"https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=20ab15f9-4879-49d5-b37c-f5afccd4f91a\"},{\"product_code\":\"P11COV0101I002\",\"product_name_1\":\"IndoVac SARS Cov-2\",\"product_name_2\":\"RBD Recombinant Protein 25 ug\",\"batch_number\":\"24902223\",\"allocation\":\"REGULAR SWT/PBF\",\"mfg_date\":\"-\",\"exp_date\":\"25/10/2025\",\"receive_date\":\"16/04/2026\",\"qr_code\":\"20ab15f9-4879-49d5-b37c-f5afccd4f91b\",\"qr_code_ext\":\"https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=20ab15f9-4879-49d5-b37c-f5afccd4f91b\"}]}"

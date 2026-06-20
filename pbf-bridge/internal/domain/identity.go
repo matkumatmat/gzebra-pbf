@@ -10,6 +10,7 @@ type ProductIdentity struct {
 	ExpDate      string `json:"exp_date"`
 	ReceiveDate  string `json:"receive_date"`
 	QRCode       string `json:"qr_code"`
+	QRCodeExt    string `json:"qr_code_ext"`
 }
 
 type PrintIdentityPayload struct {

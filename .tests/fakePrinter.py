@@ -14,7 +14,7 @@ print("🖨️  Fake Zebra Printer nyala di 127.0.0.1:9999...")
 
 while True:
     conn, addr = s.accept()
-    data = conn.recv(1024)
+    data = conn.recv(5000)
     
     if b"~HS" in data:
         print("-> Go nanya status (~HS). Ngebales: KERTAS AMAN!")
@@ -24,9 +24,9 @@ while True:
     # Nungguin Go ngirim ZPL aslinya
     zpl = conn.recv(4096)
     if zpl:
-        with open("debug/debug.txt", "ab") as f:
+        with open(r"C:\Users\HP\go-lang\gzebra-pbf\debug\debug.txt", "ab") as f:
             f.write(zpl)
-            f.write(b"\n--- END OF LABEL ---\n")
-        print("-> ZPL Diterima & di-save ke debug/debug.txt!")
+            # f.write(b"\n--- END OF LABEL ---\n")
+        print("-> ZPL Diterima & di-save ke debug.txt!")
     
     conn.close()

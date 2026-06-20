@@ -1,0 +1,64 @@
+{
+  "identities": [
+    {
+      "product_code": "P11COV0101I001",
+      "product_name_1": "IndoVac SARS Cov-2",
+      "product_name_2": "RBD Recombinant Protein 25 ug",
+      "batch_number": "24902222",
+      "allocation": "REGULAR SWT/PBF",
+      "mfg_date": "-",
+      "exp_date": "25/10/2025",
+      "receive_date": "16/04/2026",
+      "qr_code": "20ab15f9-4879-49d5-b37c-f5afccd4f91a",
+      "qr_code_ext": "https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=20ab15f9-4879-49d5-b37c-f5afccd4f91a"
+    },
+    {
+      "product_code": "P11COV0101I002",
+      "product_name_1": "IndoVac SARS Cov-2",
+      "product_name_2": "RBD Recombinant Protein 25 ug",
+      "batch_number": "24902223",
+      "allocation": "REGULAR SWT/PBF",
+      "mfg_date": "-",
+      "exp_date": "25/10/2025",
+      "receive_date": "16/04/2026",
+      "qr_code": "3c7e5a1b-9f4d-4b2e-a1c3-9f8e7d6c5b4a",
+      "qr_code_ext": "https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=3c7e5a1b-9f4d-4b2e-a1c3-9f8e7d6c5b4a"
+    },
+    {
+      "product_code": "P11COV0101I003",
+      "product_name_1": "IndoVac SARS Cov-2",
+      "product_name_2": "RBD Recombinant Protein 25 ug",
+      "batch_number": "24902224",
+      "allocation": "REGULAR SWT/PBF",
+      "mfg_date": "-",
+      "exp_date": "25/10/2025",
+      "receive_date": "16/04/2026",
+      "qr_code": "8a2d4f6e-7c3b-4d1e-9a5f-2b6c8d3e1f7a",
+      "qr_code_ext": "https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=8a2d4f6e-7c3b-4d1e-9a5f-2b6c8d3e1f7a"
+    },
+    {
+      "product_code": "P11COV0101I004",
+      "product_name_1": "IndoVac SARS Cov-2",
+      "product_name_2": "RBD Recombinant Protein 25 ug",
+      "batch_number": "24902225",
+      "allocation": "REGULAR SWT/PBF",
+      "mfg_date": "-",
+      "exp_date": "25/10/2025",
+      "receive_date": "16/04/2026",
+      "qr_code": "f4e9c2a8-5d6b-4c7e-8a1f-7d3e9b2c4a5d",
+      "qr_code_ext": "https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=f4e9c2a8-5d6b-4c7e-8a1f-7d3e9b2c4a5d"
+    },
+    {
+      "product_code": "P11COV0101I005",
+      "product_name_1": "IndoVac SARS Cov-2",
+      "product_name_2": "RBD Recombinant Protein 25 ug",
+      "batch_number": "24902226",
+      "allocation": "REGULAR SWT/PBF",
+      "mfg_date": "-",
+      "exp_date": "25/10/2025",
+      "receive_date": "16/04/2026",
+      "qr_code": "1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
+      "qr_code_ext": "https://script.google.com/macros/s/AKfycbwCYFD39K22lj4Z9xvVLitmMCLY2h46LEOLK83h9Nam33LacmaHKhhqPBZ8QsELF388/exec?id=1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e"
+    }
+  ]
+}

@@ -80,6 +80,7 @@ func (h *PrintHandler) PrintIdentity(w http.ResponseWriter, r *http.Request) {
 	}
 
 	slog.Info("Menerima request cetak Identity", "total_labels", len(payload.Identities))
+	slog.Info("Identity payload received", "identities", payload.Identities)
 
 	if err := h.identityUseCase.ProcessIdentityLabels(payload, false); err != nil {
 		slog.Error("Failed to process identity label", "error", err.Error())
