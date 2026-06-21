@@ -31,7 +31,7 @@
 ^FO30,36^GB255,259,4,,0^FS
 
 //barcode internal 1
-^FT65,270^BQN,2,6
+^FT65,270^BQN,2,4
 ^FH\^FDLA,{{ .Label1.QRCode }}^FS
 
 // kode produk
@@ -82,7 +82,7 @@
 ^FO30,1426^GB255,259,4,,0^FS
 
 // Barcode internal 2
-^FT65,1651^BQN,2,6
+^FT65,1651^BQN,2,4
 ^FH\^FDLA,{{ .Label2.QRCode }}^FS
 
 // Kode produk 2
