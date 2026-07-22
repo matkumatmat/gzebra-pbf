@@ -1,0 +1,65 @@
+CT~~CD,~CC^~CT~
+^XA
+~TA000
+~JSN
+^LT0
+^MNW
+^MTT
+^PON
+^PMN
+^LH0,0
+^JMA
+^PR4,4
+~SD25
+^JUS
+^LRN
+^CI27
+^PA0,1,1,0
+^XZ
+^XA
+^MMT
+^PW879
+^LL2797
+^LS0
+^FO40,40^GB799,1319,16,,0^FS
+^FO71,265^GB722,664,4^FS
+^FO69,1008^GB729,62,4^FS
+^FO88,287^GB690,78,4^FS
+^FT208,342^A0N,42,43^FH\^CI28^FDPRODUCT^FS^CI27
+^FT623,342^A0N,42,43^FH\^CI28^FDQTY^FS^CI27
+^FO80,1079^GB214,130,4^FS
+^FO533,296^GB0,631,4^FS
+^FT84,1255^A0N,32,33^FH\^CI28^FD!! Sertakan video saat membuka box^FS^CI27
+^FT84,1295^A0N,32,33^FH\^CI28^FD!! Pastikan box tidak rusak saat di terima^FS^CI27
+^FT91,1115^A0N,31,30^FH\^CI28^FDBERAT :^FS^CI27
+^FO36,1393^GB799,1319,16,,0^FS
+^FT581,1434^A0R,78,81^FH\^CI28^FDShipping to :^FS^CI27
+^FT691,1437^A0R,78,74^FH\^CI28^FDShipper : PT BIOFARMA (PERSERO)^FS^CI27
+^FPH,6^FT77,150^AVN,80,25^FH\^FDDAFTAR^FS
+^FPH,6^FT77,230^AVN,80,25^FH\^FDISI^FS
+^FO311,1079^GB214,130,4^FS
+^FO540,1079^GB255,130,4^FS
+^FT323,1115^A0N,31,30^FH\^CI28^FDPETUGAS :^FS^CI27
+^FT493,1436^A0R,51,48^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27
+^FT291,1436^A0R,37,35^FH\^CI28^FD{{ .Recipient.AddressLine1 }}^FS^CI27
+^FT416,1436^A0R,73,71^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27
+^FT238,1434^A0R,37,35^FH\^CI28^FD{{ .Recipient.AddressLine2 }}^FS^CI27
+^FO543,1082^GFA,161,4000,32,:Z64:eJzt16ERgDAUBNGfQUTG4lJKWqEMXCiNUigBiWAIHdwKDOJid5I3kRehzixrxKpzunXP0Oulez9knsYme3n08w34Qby+XuD37QR+N2/evHnz5s2bN2/evPk/8RX4rvkEfCb+24QMmJABE5IWcizQX5XjmEc=:D106
+^FT150,984^A0N,30,30^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27
+^FT150,1054^A0N,41,41^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27
+^FT194,1435^A0R,37,35^FH\^CI28^FDcontact : {{ .Recipient.Contact }}^FS^CI27
+^FT560,1140^A0N,50,50^FH\^CI28^FD{{ .Box.CurrentBox }}^FS^CI27
+^FT672,1188^A0N,50,50^FH\^CI28^FD{{ .TotalBox }}^FS^CI27
+^FT337,1173^A0N,56,56^FH\^CI28^FD{{ .Box.Petugas }}^FS^CI27
+^FT93,1174^A0N,56,56^FH\^CI28^FD{{ .Box.Temperature }}^FS^CI27
+^FT96,456^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Name }}{{ end }}^FS^CI27
+^FT559,456^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Qty }}{{ end }}^FS^CI27
+^FT96,536^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Name }}{{ end }}^FS^CI27
+^FT559,536^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Qty }}{{ end }}^FS^CI27
+^FT96,615^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Name }}{{ end }}^FS^CI27
+^FT559,615^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Qty }}{{ end }}^FS^CI27
+^FT96,695^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Name }}{{ end }}^FS^CI27
+^FT559,695^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Qty }}{{ end }}^FS^CI27
+^FO73,940^GB727,62,4^FS
+^PQ1,0,1,Y
+^XZ

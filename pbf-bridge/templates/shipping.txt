@@ -1,4 +1,3 @@
-CT~~CD,~CC^~CT~
 ^XA
 ~TA000
 ~JSN
@@ -18,48 +17,73 @@
 ^XZ
 ^XA
 ^MMT
-^PW879
-^LL2797
+^PW1183
+^LL1679
 ^LS0
-^FO40,40^GB799,1319,16,,0^FS
-^FO71,265^GB722,664,4^FS
-^FO69,1008^GB729,62,4^FS
-^FO88,287^GB690,78,4^FS
-^FT208,342^A0N,42,43^FH\^CI28^FDPRODUCT^FS^CI27
-^FT623,342^A0N,42,43^FH\^CI28^FDQTY^FS^CI27
-^FO80,1079^GB214,130,4^FS
-^FO533,296^GB0,631,4^FS
-^FT84,1255^A0N,32,33^FH\^CI28^FD!! Sertakan video saat membuka box^FS^CI27
-^FT84,1295^A0N,32,33^FH\^CI28^FD!! Pastikan box tidak rusak saat di terima^FS^CI27
-^FT91,1115^A0N,31,30^FH\^CI28^FDBERAT :^FS^CI27
-^FO36,1393^GB799,1319,16,,0^FS
-^FT581,1434^A0R,78,81^FH\^CI28^FDShipping to :^FS^CI27
-^FT691,1437^A0R,78,74^FH\^CI28^FDShipper : PT BIOFARMA (PERSERO)^FS^CI27
-^FPH,6^FT77,150^AVN,80,25^FH\^FDDAFTAR^FS
-^FPH,6^FT77,230^AVN,80,25^FH\^FDISI^FS
-^FO311,1079^GB214,130,4^FS
-^FO540,1079^GB255,130,4^FS
-^FT323,1115^A0N,31,30^FH\^CI28^FDPETUGAS :^FS^CI27
-^FT493,1436^A0R,51,48^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27
-^FT291,1436^A0R,37,35^FH\^CI28^FD{{ .Recipient.AddressLine1 }}^FS^CI27
-^FT416,1436^A0R,73,71^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27
-^FT238,1434^A0R,37,35^FH\^CI28^FD{{ .Recipient.AddressLine2 }}^FS^CI27
-^FO543,1082^GFA,161,4000,32,:Z64:eJzt16ERgDAUBNGfQUTG4lJKWqEMXCiNUigBiWAIHdwKDOJid5I3kRehzixrxKpzunXP0Oulez9knsYme3n08w34Qby+XuD37QR+N2/evHnz5s2bN2/evPk/8RX4rvkEfCb+24QMmJABE5IWcizQX5XjmEc=:D106
-^FT150,984^A0N,30,30^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27
-^FT150,1054^A0N,41,41^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27
-^FT194,1435^A0R,37,35^FH\^CI28^FDcontact : {{ .Recipient.Contact }}^FS^CI27
-^FT560,1140^A0N,50,50^FH\^CI28^FD{{ .Box.CurrentBox }}^FS^CI27
-^FT672,1188^A0N,50,50^FH\^CI28^FD{{ .TotalBox }}^FS^CI27
-^FT337,1173^A0N,56,56^FH\^CI28^FD{{ .Box.Petugas }}^FS^CI27
-^FT93,1174^A0N,56,56^FH\^CI28^FD{{ .Box.Temperature }}^FS^CI27
-^FT96,456^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Name }}{{ end }}^FS^CI27
-^FT559,456^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Qty }}{{ end }}^FS^CI27
-^FT96,536^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Name }}{{ end }}^FS^CI27
-^FT559,536^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Qty }}{{ end }}^FS^CI27
-^FT96,615^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Name }}{{ end }}^FS^CI27
-^FT559,615^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Qty }}{{ end }}^FS^CI27
-^FT96,695^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Name }}{{ end }}^FS^CI27
-^FT559,695^A0N,56,56^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Qty }}{{ end }}^FS^CI27
-^FO73,940^GB727,62,4^FS
-^PQ1,0,1,Y
+
+//div-daftar-isi
+^FO20,20^GB839,1039,6,B,0^FS // outline-box-luar atas (daftar-isi)(1)
+^FO20,20^GB480,900,6,B,0^FS // outline-box-dalam atas (daftar-isi-product)(1.1)
+^FO495,20^GB160,900,6,B,0^FS // outline-box-dalam atas (daftar-isi-qty)(1.2)
+
+^FO20,20^GB637,100,6,B,0^FS // outline-box-dalam atas (daftar-isi-nama-kolom)(1.3)
+^FT140,90^A0N,42,43^FH\^CI28^FDPRODUK^FS^CI27 //title-daftar-isi-nama-kolom(title-product)(1.3.1)
+^FO40,149^A0N,28,28^FB445,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Name }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.1.0)
+^FO40,249^A0N,28,28^FB445,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Name }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.1.1)
+^FO40,349^A0N,28,28^FB445,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Name }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.1.2)
+^FO40,449^A0N,28,28^FB445,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Name }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.1.3)
+
+^FT540,90^A0N,42,43^FH\^CI28^FDQTY^FS^CI27 //title-daftar-isi-nama-kolom(title-qty)(1.3.2)
+^FO499,149^A0N,28,28^FB148,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 0 }}{{ (index .Box.Products 0).Qty }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.2.0)
+^FO499,249^A0N,28,28^FB148,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 1 }}{{ (index .Box.Products 1).Qty }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.2.1)
+^FO499,349^A0N,28,28^FB148,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 2 }}{{ (index .Box.Products 2).Qty }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.2.2)
+^FO499,449^A0N,28,28^FB148,2,0,C,0^FH\^CI28^FD{{ if gt (len .Box.Products) 3 }}{{ (index .Box.Products 3).Qty }}{{ end }}^FS^CI27 //value-product(value-product-index-0)(1.3.2.3)
+
+
+^FO20,914^GB580,70,6,B,0^2S // outline-box-dalam atas (daftar-isi-nama-konsumen)(1.4)
+^FO40,939^A0N,28,28^FB535,1,0,C,0^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27 //value-nama-konsumen(value-nama-konsumen)(1.4.1)
+^FO40,1004^A0N,28,28^FB535,1,0,C,0^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27 //value-nama-branch(value-nama-branch)(1.4.2)
+
+^FO20,977^GB580,80,6,B,0^FS // outline-box-dalam atas (daftar-isi-nama-branch)(1.5)
+^FO650,20^GB209,170,6,B,0^FS // outline-box-dalam atas (kode-petugas)(1.6)
+^FO660,99^A0N,38,38^FB190,1,0,C,0^FH\^CI28^FD{{ .Box.Petugas }}^FS^CI27 //value-kode-petugas(value-kode-petugas)(1.6.1)
+^FT660,60^A0N,25,25^FH\^CI28^FDKode Petugas :^FS^CI27 //title-kode-petugas(title-kode-petugas)(1.6.2)
+
+^FO650,185^GB209,170,6,B,0^FS // outline-box-dalam atas (berat-box)(1.7)
+^FT660,228^A0N,25,25^FH\^CI28^FDBerat  :^FS^CI27 //title-berat-box(title-berat-box)(1.7.1)
+^FO660,259^A0N,38,38^FB190,1,0,C,0^FH\^CI28^FD{{ .Box.Temperature }}^FS^CI27 //value-berat-box(value-berat-box)(1.7.2)
+
+
+^FO651,348^GB209,340,6,B,0^FS // outline-box-dalam atas (number-koli)(1.8)
+^FO650,348^GB209,180,6,B,0^FS // outline-box-dalam-number-koli (current-koli)(1.8.1)
+^FT660,390^A0N,25,25^FH\^CI28^FDNo Koli  :^FS^CI27 //title-current-koli(title-current-koli)(1.8.1.1)
+^FO660,429^A0N,38,38^FB190,1,0,C,0^FH\^CI28^FD{{ .Box.CurrentBox }}^FS^CI27 //value-current-box(value-current-box)(1.8.1.2)
+^FT660,558^A0N,25,25^FH\^CI28^FDTotal Koli  :^FS^CI27 //title-current-koli(title-total-koli)(1.8.2.1)
+^FO660,604^A0N,38,38^FB190,1,0,C,0^FH\^CI28^FD{{ .TotalBox }}^FS^CI27 //value-total-box(value-total-box)(1.8.2.2)
+
+^FO594,914^GB265,143,6,B,0^FS // outline-box-dalam atas (option-suhu)(1.9)
+^FT660,728^A0N,25,25^FH\^CI28^FDSuhu  :^FS^CI27 //title-option-suhu(title-option-suhu)(1.9.1)
+^FT697,778^A0N,35,35^FH\^CI28^FD2-8°C^FS^CI27 //item-option-suhu(item-option-suhu)(1.9.1)
+^FT697,828^A0N,35,35^FH\^CI28^FD- 20°C^FS^CI27 //item-option-suhu(item-option-suhu)(1.9.1)
+^FT672,878^A0N,35,35^FH\^CI28^FDsuhu ruang^FS^CI27 //item-option-suhu(item-option-suhu)(1.9.1)
+
+
+//div-alamat
+^FO20,1080^GB839,580,6,B,0^FS // outline-box-luar bawah (alamat)(2)
+^FT50,1140^A0N,42,43^FH\^CI28^FDShipper       : PT BIOFARMA (PERSERO)^FS^CI27 //item-shipper (2.1)
+
+^FT50,1190^A0N,42,43^FH\^CI28^FDShipping to :^FS^CI27 //item-shipping-to (2.2)
+^FO280,1156^A0N,50,50^FB560,3,0,L,0^FH\^CI28^FD{{ .Recipient.Customer }}^FS^CI27 //value-nama-konsumen(value-nama-konsumen)(2.2.1)
+
+^FT50,1340^A0N,42,43^FH\^CI28^FDCabang       :^FS^CI27 //item-branch-to (2.3)
+^FO280,1310^A0N,50,50^FB560,3,0,L,0^FH\^CI28^FD{{ .Recipient.Branch }}^FS^CI27 //value-nama-branch(value-nama-branch)(2.3.1)
+
+^FT50,1460^A0N,34,34^FH\^CI28^FDAlamat :^FS^CI27 //item-addresses-to (2.4)
+^FO50,1470^A0N,30,30^FB660,2,0,L,0^FH\^CI28^FD{{ .Recipient.AddressLine1 }}^FS^CI27 //value-nama-address-1(value-nama-address-1)(2.4.1)
+^FO50,1540^A0N,30,30^FB660,2,0,L,0^FH\^CI28^FD{{ .Recipient.AddressLine2 }}^FS^CI27 //value-nama-address-2(value-nama-address-2)(2.4.2)
+
+^FT50,1640^A0N,34,34^FH\^CI28^FDKontak              :^FS^CI27 //item-contact-to (2.5)
+^FO280,1613^A0N,30,30^FB660,1,0,L,0^FH\^CI28^FD{{ .Recipient.Contact }}^FS^CI27 //value-nama-address-1(value-nama-address-1)(2.5.1)
+
+^PQ1,0,1,Y,Y
 ^XZ
